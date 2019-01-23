@@ -8,4 +8,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Add the executable
-add_executable(patterns main.cpp exercise.cpp exercise.h)
+add_executable(patterns main.cpp exercise.hpp)

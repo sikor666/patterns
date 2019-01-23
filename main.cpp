@@ -1,21 +1,26 @@
 /*
- * Kompozyt – strukturalny wzorzec projektowy, którego celem jest sk³adanie obiektów
- * w taki sposób, aby klient widzia³ wiele z nich jako pojedynczy obiekt.
+ * Wzorzec mostu (ang. Bridge pattern) – strukturalny wzorzec projektowy, który
+ * pozwala oddzieliæ abstrakcjê obiektu od jego implementacji.
+ * Zaleca siê stosowanie tego wzorca aby:
+ * odseparowaæ implementacjê od interfejsu,
+ * poprawiæ mo¿liwoœci rozbudowy klas, zarówno implementacji, jak i interfejsu
+ * (m.in. przez dziedziczenie),
+ * ukryæ implementacjê przed klientem, co umo¿liwia zmianê implementacji bez zmian
+ * interfejsu.
  *
- * Wzorzec ten stosuje siê, gdy wygodniej jest korzystaæ z pewnych operacji dla
- * danego obiektu w ten sam sposób jak dla grupy obiektów, np. rysuj¹c na ekranie
- * prymitywy lub obiekty z³o¿one z prymitywów; zmieniaj¹c rozmiar zarówno
- * pojedynczych prymitywów jak i obiektów z³o¿onych z prymitywów (z zachowaniem
- * proporcji).
+ * W abstrakcji, jak¹ s¹ figury geometryczne, mo¿na wyszczególniæ np. kwadraty,
+ * czy trójk¹ty. Jednak proces rysowania poszczególnych figur mo¿e wygl¹daæ inaczej
+ * dla ró¿nych bibliotek graficznych czy systemów operacyjnych. Wzorzec mostu
+ * pozwala na stworzenie nowych klas, które dostarczaj¹ konkretnych implementacji
+ * do rysowania. Klasa abstrakcyjna figury dostarcza informacji o figurze
+ * (np. wielkoœæ), podczas gdy implementacja dostarcza interfejs do rysowania.
  */
 
-#include "exercise.h"
+#include "exercise.hpp"
+
+#include <iostream>
 
 int main()
 {
-    SingleValue single_value{ 1 };
-    ManyValues other_values;
-    other_values.add(2);
-    other_values.add(3);
-    sum({ &single_value, &other_values }); // returns 6
+    cout << Triangle(RasterRenderer{}).str() << endl; // returns "Drawing Triangle as pixels"
 }
