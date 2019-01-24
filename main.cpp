@@ -1,19 +1,12 @@
 /*
- * Wzorzec mostu (ang. Bridge pattern) – strukturalny wzorzec projektowy, który
- * pozwala oddzieliæ abstrakcjê obiektu od jego implementacji.
- * Zaleca siê stosowanie tego wzorca aby:
- * odseparowaæ implementacjê od interfejsu,
- * poprawiæ mo¿liwoœci rozbudowy klas, zarówno implementacji, jak i interfejsu
- * (m.in. przez dziedziczenie),
- * ukryæ implementacjê przed klientem, co umo¿liwia zmianê implementacji bez zmian
- * interfejsu.
+ * Dekorator – wzorzec projektowy nale¿¹cy do grupy wzorców strukturalnych.
+ * Pozwala na dodanie nowej funkcji do istniej¹cych klas dynamicznie podczas
+ * dzia³ania programu.
  *
- * W abstrakcji, jak¹ s¹ figury geometryczne, mo¿na wyszczególniæ np. kwadraty,
- * czy trójk¹ty. Jednak proces rysowania poszczególnych figur mo¿e wygl¹daæ inaczej
- * dla ró¿nych bibliotek graficznych czy systemów operacyjnych. Wzorzec mostu
- * pozwala na stworzenie nowych klas, które dostarczaj¹ konkretnych implementacji
- * do rysowania. Klasa abstrakcyjna figury dostarcza informacji o figurze
- * (np. wielkoœæ), podczas gdy implementacja dostarcza interfejs do rysowania.
+ * Wzorzec dekoratora polega na opakowaniu oryginalnej klasy w now¹ klasê
+ * "dekoruj¹c¹". Zwykle przekazuje siê oryginalny obiekt jako parametr konstruktora
+ * dekoratora, metody dekoratora wywo³uj¹ metody oryginalnego obiektu i dodatkowo
+ * implementuj¹ now¹ funkcjê.
  */
 
 #include "exercise.hpp"
@@ -22,5 +15,14 @@
 
 int main()
 {
-    cout << Triangle(RasterRenderer{}).str() << endl; // returns "Drawing Triangle as pixels"
+    Rose rose;
+    RedFlower red_rose{ rose };
+    RedFlower red_red_rose{ red_rose };
+    BlueFlower blue_red_rose{ red_rose };
+    RedFlower red_blue_red_rose{ blue_red_rose };
+    cout << rose.str() << endl; // "A rose"
+    cout << red_rose.str() << endl; // "A rose that is red"
+    cout << red_red_rose.str() << endl; // "A rose that is red"
+    cout << blue_red_rose.str() << endl; // "A rose that is red and blue"
+    cout << red_blue_red_rose.str() << endl;
 }

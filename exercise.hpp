@@ -1,56 +1,61 @@
 #include <string>
 using namespace std;
 
-struct Renderer
+struct Flower
 {
-    virtual string what_to_render_as() const = 0;
+    virtual string str() = 0;
+    string color;
 };
 
-struct Shape
+struct Rose : Flower
 {
-    Shape(const Renderer& renderer_) : renderer{ renderer_ }
-    {
-    }
-
-    string str() const
-    {
-        return "Drawing " + name + " as " + renderer.what_to_render_as();
-    }
-
-    string name;
-
-protected:
-    const Renderer& renderer;
-};
-
-struct Triangle : Shape
-{
-    Triangle(const Renderer& renderer_) : Shape{ renderer_ }
-    {
-        name = "Triangle";
+    string str() override {
+        return "A rose";
     }
 };
 
-struct Square : Shape
+struct RedFlower : Flower
 {
-    Square(const Renderer& renderer_) : Shape{ renderer_ }
+    RedFlower(Flower& flower_) : flower{ flower_ }
     {
-        name = "Square";
+        color = "red";
+    }
+
+    Flower& flower;
+
+    string str() override {
+        string conjunctive;
+        if (flower.color.empty() || flower.color == "red")
+        {
+            conjunctive = " that is";
+        }
+        else
+        {
+            conjunctive = " and";
+        }
+        return flower.str() + conjunctive + " red";
     }
 };
 
-struct RasterRenderer : Renderer
+struct BlueFlower : Flower
 {
-    virtual string what_to_render_as() const override
+    BlueFlower(Flower& flower_) : flower{ flower_ }
     {
-        return "pixels";
+        color = "blue";
     }
-};
 
-struct VectorRenderer : Renderer
-{
-    virtual string what_to_render_as() const override
-    {
-        return "lines";
+    Flower& flower;
+
+    string str() override {
+        string conjunctive;
+        if (flower.color.empty() || flower.color == "blue")
+        {
+            conjunctive = " that is";
+        }
+        else
+        {
+            conjunctive = " and";
+        }
+        return flower.str() + conjunctive + " blue";
     }
 };
