@@ -1,28 +1,18 @@
 /*
- * Dekorator – wzorzec projektowy nale¿¹cy do grupy wzorców strukturalnych.
- * Pozwala na dodanie nowej funkcji do istniej¹cych klas dynamicznie podczas
- * dzia³ania programu.
+ * Adapter (tak¿e: opakowanie, ang. wrapper) – strukturalny wzorzec projektowy,
+ * którego celem jest umo¿liwienie wspó³pracy dwóm klasom o niekompatybilnych
+ * interfejsach. Adapter przekszta³ca interfejs jednej z klas na interfejs drugiej
+ * klasy. Innym zadaniem omawianego wzorca jest opakowanie istniej¹cego
+ * interfejsu w nowy.
  *
- * Wzorzec dekoratora polega na opakowaniu oryginalnej klasy w now¹ klasê
- * "dekoruj¹c¹". Zwykle przekazuje siê oryginalny obiekt jako parametr konstruktora
- * dekoratora, metody dekoratora wywo³uj¹ metody oryginalnego obiektu i dodatkowo
- * implementuj¹ now¹ funkcjê.
+ * Wzorzec adaptera stosowany jest najczêœciej w przypadku, gdy wykorzystanie
+ * istniej¹cej klasy jest niemo¿liwe ze wzglêdu na jej niekompatybilny interfejs.
+ * Drugim powodem u¿ycia mo¿e byæ chêæ stworzenia klasy, która bêdzie wspó³pracowa³a
+ * z klasami o nieokreœlonych interfejsach.
  */
 
 #include "exercise.hpp"
 
-#include <iostream>
-
 int main()
 {
-    Rose rose;
-    RedFlower red_rose{ rose };
-    RedFlower red_red_rose{ red_rose };
-    BlueFlower blue_red_rose{ red_rose };
-    RedFlower red_blue_red_rose{ blue_red_rose };
-    cout << rose.str() << endl; // "A rose"
-    cout << red_rose.str() << endl; // "A rose that is red"
-    cout << red_red_rose.str() << endl; // "A rose that is red"
-    cout << blue_red_rose.str() << endl; // "A rose that is red and blue"
-    cout << red_blue_red_rose.str() << endl;
 }

@@ -1,71 +1,30 @@
-#include <string>
-using namespace std;
-
-struct Flower
+struct Square
 {
-    virtual string str() = 0;
+    int side{ 0 };
 
-    string message;
-};
 
-struct Rose : Flower
-{
-    Rose()
+    explicit Square(const int side)
+        : side(side)
     {
-        message = "A rose";
-    }
-
-    string str() override {
-        return message;
     }
 };
 
-struct RedFlower : Flower
+struct Rectangle
 {
-    RedFlower(Flower& flower_) : flower{ flower_ }
+    virtual int width() const = 0;
+    virtual int height() const = 0;
+
+    int area() const
     {
-        if (flower.message == "A rose")
-        {
-            message = flower.message + " that is red";
-        }
-        else if (flower.message.find("red") == string::npos)
-        {
-            message = flower.message + " and red";
-        }
-        else
-        {
-            message = flower.message;
-        }
+        return width() * height();
     }
-
-    string str() override {
-        return message;
-    }
-
-    Flower& flower;
 };
 
-struct BlueFlower : Flower
+struct SquareToRectangleAdapter : Rectangle
 {
-    BlueFlower(Flower& flower_) : flower{ flower_ }
+    SquareToRectangleAdapter(const Square& square)
     {
-        if (flower.message == "A rose")
-        {
-            message = flower.message + " that is blue";
-        }
-        else if (flower.message.find("blue") == string::npos)
-        {
-            message = flower.message + " and blue";
-        }
-        else
-        {
-            message = flower.message;
-        }
+        // todo
     }
-
-    string str() override {
-        return message;
-    }
-
-    Flower& flower;
+    // todo
 };
