@@ -4,13 +4,19 @@ using namespace std;
 struct Flower
 {
     virtual string str() = 0;
-    string color;
+
+    string message;
 };
 
 struct Rose : Flower
 {
+    Rose()
+    {
+        message = "A rose";
+    }
+
     string str() override {
-        return "A rose";
+        return message;
     }
 };
 
@@ -18,44 +24,48 @@ struct RedFlower : Flower
 {
     RedFlower(Flower& flower_) : flower{ flower_ }
     {
-        color = "red";
-    }
-
-    Flower& flower;
-
-    string str() override {
-        string conjunctive;
-        if (flower.color.empty() || flower.color == "red")
+        if (flower.message == "A rose")
         {
-            conjunctive = " that is";
+            message = flower.message + " that is red";
+        }
+        else if (flower.message.find("red") == string::npos)
+        {
+            message = flower.message + " and red";
         }
         else
         {
-            conjunctive = " and";
+            message = flower.message;
         }
-        return flower.str() + conjunctive + " red";
     }
+
+    string str() override {
+        return message;
+    }
+
+    Flower& flower;
 };
 
 struct BlueFlower : Flower
 {
     BlueFlower(Flower& flower_) : flower{ flower_ }
     {
-        color = "blue";
-    }
-
-    Flower& flower;
-
-    string str() override {
-        string conjunctive;
-        if (flower.color.empty() || flower.color == "blue")
+        if (flower.message == "A rose")
         {
-            conjunctive = " that is";
+            message = flower.message + " that is blue";
+        }
+        else if (flower.message.find("blue") == string::npos)
+        {
+            message = flower.message + " and blue";
         }
         else
         {
-            conjunctive = " and";
+            message = flower.message;
         }
-        return flower.str() + conjunctive + " blue";
     }
+
+    string str() override {
+        return message;
+    }
+
+    Flower& flower;
 };
