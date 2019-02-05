@@ -1,40 +1,26 @@
-#include <iostream>
+#include "ChainOfResponsibility.hpp"
 
-using namespace std;
-
-long multiply(int i, int j)
-{
-    return i * j;
-}
-
-template <class T>
-typename T::multiplication_result multiply(T t1, T t2)
-{
-    return t1 * t2;
-}
-
-struct A
-{
-    char c;
-    int a;
-    long b;
-};
-
-union B
-{
-    int a;
-    long b;
-    char c;
-};
+#include <cassert>
 
 int main(void)
 {
-    cout << sizeof(void*) << endl;
-    cout << sizeof(A) << endl;
-    cout << sizeof(B) << endl;
-    cout << sizeof(int) << endl;
-    cout << sizeof(long) << endl;
-    cout << sizeof(char) << endl;
+    Game game;
 
-    multiply(4, 5);
+    Goblin goblin1(game);
+    Goblin goblin2(game);
+    Goblin goblin3(game);
+
+    GoblinKing goblinKing(game);
+
+    game.creatures.push_back(&goblin1);
+    game.creatures.push_back(&goblin2);
+    game.creatures.push_back(&goblin3);
+
+    game.creatures.push_back(&goblinKing);
+
+    assert(2 == goblin1.get_attack());
+    assert(4 == goblin1.get_defense());
+
+    assert(3 == goblinKing.get_attack());
+    assert(6 == goblinKing.get_defense());
 }

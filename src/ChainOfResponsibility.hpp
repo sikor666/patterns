@@ -4,17 +4,7 @@
 
 using namespace std;
 
-struct Creature;
-struct Game
-{
-    vector<Creature*> creatures;
-};
-
-struct StatQuery
-{
-    enum Statistic { attack, defense } statistic;
-    int result;
-};
+struct Game;
 
 struct Creature
 {
@@ -27,6 +17,42 @@ public:
         base_defense(base_defense) {}
     virtual int get_attack() = 0;
     virtual int get_defense() = 0;
+
+    virtual int attack_modifier() = 0;
+    virtual int defense_modifier() = 0;
+};
+
+struct Game
+{
+    vector<Creature*> creatures;
+
+    int attackModifier(Creature* creature)
+    {
+        int result = 0;
+        for (auto c : creatures)
+        {
+            result += c->attack_modifier();
+        }
+
+        return result - creature->attack_modifier();
+    }
+
+    int defenseModifier(Creature* creature)
+    {
+        int result = 0;
+        for (auto c : creatures)
+        {
+            result += c->defense_modifier();
+        }
+
+        return result - creature->defense_modifier();
+    }
+};
+
+struct StatQuery
+{
+    enum Statistic { attack, defense } statistic;
+    int result;
 };
 
 class Goblin : public Creature
@@ -36,12 +62,24 @@ public:
 
     Goblin(Game &game) : Creature(game, 1, 1) {}
 
+    int attack_modifier() override
+    {
+        return 0;
+    }
+
+    int defense_modifier() override
+    {
+        return 1;
+    }
+
     int get_attack() override {
         // todo
+        return base_attack + game.attackModifier(this);
     }
 
     int get_defense() override {
         // todo
+        return base_defense + game.defenseModifier(this);
     }
 };
 
@@ -51,4 +89,13 @@ public:
     GoblinKing(Game &game) : Goblin(game, 3, 3) {}
 
     // todo
+    int attack_modifier() override
+    {
+        return 1;
+    }
+
+    int defense_modifier() override
+    {
+        return 1;
+    }
 };
