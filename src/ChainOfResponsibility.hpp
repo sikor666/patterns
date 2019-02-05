@@ -1,12 +1,21 @@
 #pragma once
 
+/*
+ * £añcuch zobowi¹zañ (ang. Chain of responsibility, niekiedy t³umaczony tak¿e
+ * jako £añcuch odpowiedzialnoœci) – czynnoœciowy wzorzec projektowy, w którym
+ * ¿¹danie mo¿e byæ przetwarzane przez ró¿ne obiekty, w zale¿noœci od jego typu.
+ */
+
 #include <vector>
+
 using namespace std;
 
-struct Creature;
+namespace ChainOfResponsibility
+{
+
 struct Game
 {
-    vector<Creature*> creatures;
+    vector<struct Creature*> creatures;
 };
 
 struct StatQuery
@@ -88,3 +97,5 @@ public:
         else Goblin::query(source, sq);
     }
 };
+
+} // namespace ChainOfResponsibility
