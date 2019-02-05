@@ -1,3 +1,4 @@
+#include "Strategy.hpp"
 #include "Adapter.hpp"
 #include "Decorator.hpp"
 #include "Bridge.hpp"
@@ -8,6 +9,41 @@
 
 int main(void)
 {
+    // Strategy
+    using namespace Strategy;
+    {
+        OrdinaryDiscriminantStrategy strategy;
+        QuadraticEquationSolver solver{ strategy };
+        auto results = solver.solve(1, 10, 16);
+        assert(complex<double>(-2, 0) == get<0>(results));
+        assert(complex<double>(-8, 0) == get<1>(results));
+    }
+    {
+        RealDiscriminantStrategy strategy;
+        QuadraticEquationSolver solver{ strategy };
+        auto results = solver.solve(1, 10, 16);
+        assert(complex<double>(-2, 0) == get<0>(results));
+        assert(complex<double>(-8, 0) == get<1>(results));
+    }
+    {
+        OrdinaryDiscriminantStrategy strategy;
+        QuadraticEquationSolver solver{ strategy };
+        auto results = solver.solve(1, 4, 5);
+        assert(complex<double>(-2, 1) == get<0>(results));
+        assert(complex<double>(-2, -1) == get<1>(results));
+    }
+    {
+        RealDiscriminantStrategy strategy;
+        QuadraticEquationSolver solver{ strategy };
+        auto results = solver.solve(1, 4, 5);
+        auto x1 = get<0>(results);
+        auto x2 = get<1>(results);
+        assert(isnan(x1.real()));
+        assert(isnan(x2.real()));
+        assert(isnan(x1.imag()));
+        assert(isnan(x2.imag()));
+    }
+
     // Adapter
     using namespace Adapter;
     Square sq{ 11 };
