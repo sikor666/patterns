@@ -14,4 +14,4 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 file(GLOB_RECURSE SRC "${CMAKE_CURRENT_SOURCE_DIR}/src/*.*")
 
 # Add the executable
-add_executable(patterns main.cpp exercise.hpp ${SRC})
+add_executable(patterns main.cpp ${SRC})
