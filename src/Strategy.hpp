@@ -5,7 +5,7 @@
  * wymiennych algorytmów i kapsu³kuje je w postaci klas. Umo¿liwia wymienne
  * stosowanie ka¿dego z nich w trakcie dzia³ania aplikacji niezale¿nie od
  * korzystaj¹cych z nich u¿ytkowników.
-*/
+ */
 
 #include <iostream>
 #include <vector>

@@ -1,3 +1,4 @@
+#include "Flyweight.hpp"
 #include "Strategy.hpp"
 #include "Adapter.hpp"
 #include "Decorator.hpp"
@@ -9,6 +10,11 @@
 
 int main(void)
 {
+    // Flyweight
+    using namespace Flyweight;
+    Sentence sentence("hello world");
+    sentence[1].capitalize = true;
+    assert("hello WORLD" == sentence.str());
     // Strategy
     using namespace Strategy;
     {
