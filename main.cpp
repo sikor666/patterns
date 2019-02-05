@@ -1,18 +1,40 @@
-/*
- * Adapter (tak¿e: opakowanie, ang. wrapper) – strukturalny wzorzec projektowy,
- * którego celem jest umo¿liwienie wspó³pracy dwóm klasom o niekompatybilnych
- * interfejsach. Adapter przekszta³ca interfejs jednej z klas na interfejs drugiej
- * klasy. Innym zadaniem omawianego wzorca jest opakowanie istniej¹cego
- * interfejsu w nowy.
- *
- * Wzorzec adaptera stosowany jest najczêœciej w przypadku, gdy wykorzystanie
- * istniej¹cej klasy jest niemo¿liwe ze wzglêdu na jej niekompatybilny interfejs.
- * Drugim powodem u¿ycia mo¿e byæ chêæ stworzenia klasy, która bêdzie wspó³pracowa³a
- * z klasami o nieokreœlonych interfejsach.
- */
+#include <iostream>
 
-#include "exercise.hpp"
+using namespace std;
 
-int main()
+long multiply(int i, int j)
 {
+    return i * j;
+}
+
+template <class T>
+typename T::multiplication_result multiply(T t1, T t2)
+{
+    return t1 * t2;
+}
+
+struct A
+{
+    char c;
+    int a;
+    long b;
+};
+
+union B
+{
+    int a;
+    long b;
+    char c;
+};
+
+int main(void)
+{
+    cout << sizeof(void*) << endl;
+    cout << sizeof(A) << endl;
+    cout << sizeof(B) << endl;
+    cout << sizeof(int) << endl;
+    cout << sizeof(long) << endl;
+    cout << sizeof(char) << endl;
+
+    multiply(4, 5);
 }
