@@ -1,3 +1,4 @@
+#include "Prototype.hpp"
 #include "Flyweight.hpp"
 #include "Strategy.hpp"
 #include "Adapter.hpp"
@@ -8,13 +9,25 @@
 
 #include <cassert>
 
-int main(void)
+int main()
 {
+    // Prototype
+    using namespace Prototype;
+    Line line1{ new Point{ 3, 3 }, new Point{ 10, 10 } };
+    auto line2 = line1.deep_copy();
+    line1.start->x = line1.start->y =
+    line1.end->y = line1.end->y = 0;
+    assert(3 == line2.start->x);
+    assert(3 == line2.start->y);
+    assert(10 == line2.end->x);
+    assert(10 == line2.end->y);
+
     // Flyweight
     using namespace Flyweight;
     Sentence sentence("hello world");
     sentence[1].capitalize = true;
-    assert("hello WORLD" == sentence.str());
+    assert("hello WORLD" == sentence.str());
+
     // Strategy
     using namespace Strategy;
     {
