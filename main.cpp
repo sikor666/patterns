@@ -1,3 +1,4 @@
+#include "State.hpp"
 #include "Builder.hpp"
 #include "Command.hpp"
 #include "Prototype.hpp"
@@ -13,6 +14,29 @@
 
 int main()
 {
+    // State
+    using namespace State;
+    {
+        CombinationLock cl({ 1,2,3 });
+        assert("LOCKED" == cl.status);
+        cl.enter_digit(1);
+        assert("1" == cl.status);
+        cl.enter_digit(2);
+        assert("12" == cl.status);
+        cl.enter_digit(3);
+        assert("OPEN" == cl.status);
+    }
+    {
+        CombinationLock cl({ 1,2,3 });
+        assert("LOCKED" == cl.status);
+        cl.enter_digit(1);
+        assert("1" == cl.status);
+        cl.enter_digit(2);
+        assert("12" == cl.status);
+        cl.enter_digit(5);
+        assert("ERROR" == cl.status);
+    }
+
     // Builder
     using namespace Builder;
     auto cb = CodeBuilder{"Person"}.add_field("name", "string")
