@@ -1,3 +1,4 @@
+#include "Command.hpp"
 #include "Prototype.hpp"
 #include "Flyweight.hpp"
 #include "Strategy.hpp"
@@ -11,6 +12,22 @@
 
 int main()
 {
+    // Command
+    using namespace Cmd;
+    Account a;
+    Command command{ Command::deposit, 100 };
+    a.process(command);
+    assert(100 == a.balance);
+    assert(command.success);
+    command = Command{ Command::withdraw, 50 };
+    a.process(command);
+    assert(50 == a.balance);
+    assert(command.success);
+    command = Command{ Command::withdraw, 150 };
+    a.process(command);
+    assert(50 == a.balance);
+    assert(!command.success);
+
     // Prototype
     using namespace Prototype;
     Line line1{ new Point{ 3, 3 }, new Point{ 10, 10 } };
