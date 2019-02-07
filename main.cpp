@@ -1,3 +1,4 @@
+#include "Builder.hpp"
 #include "Command.hpp"
 #include "Prototype.hpp"
 #include "Flyweight.hpp"
@@ -12,6 +13,14 @@
 
 int main()
 {
+    // Builder
+    using namespace Builder;
+    auto cb = CodeBuilder{"Person"}.add_field("name", "string")
+                                   .add_field("age", "int");
+    ostringstream oss;
+    oss << cb;
+    assert("class Person\n{\n  string name;\n  int age;\n};" == oss.str());
+
     // Command
     using namespace Cmd;
     Account a;
